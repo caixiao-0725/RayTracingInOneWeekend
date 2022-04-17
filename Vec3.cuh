@@ -7,7 +7,7 @@
 #define  __hd__ static __host__ __device__
 
 
-//Ò»°ãµÄÇé¿öÏÂ£¬³öÏÖÑ­»·£¬²»ÓÃinline¡£³öÏÖºÜ³¤µÄº¯Êı¶¨Òå£¬²»ÓÃinline£¬ÒòÎªÕâ»áµ¼ÖÂÄÚ´æ¿ªÏúºÜ´ó
+//ä¸€èˆ¬çš„æƒ…å†µä¸‹ï¼Œå‡ºç°å¾ªç¯ï¼Œä¸ç”¨inlineã€‚å‡ºç°å¾ˆé•¿çš„å‡½æ•°å®šä¹‰ï¼Œä¸ç”¨inlineï¼Œå› ä¸ºè¿™ä¼šå¯¼è‡´å†…å­˜å¼€é”€å¾ˆå¤§
 struct Vec3 {
 	double x,y,z;
 };
@@ -21,7 +21,7 @@ inline __hd__ Vec3 make_vec3(double x_, double y_, double z_) {
 };
 
 
-//ÖØĞ´  operator +
+//é‡å†™  operator +
 inline __hd__ Vec3 operator+(Vec3 a,Vec3 b) {
 	return make_vec3(a.x + b.x, a.y + b.y, a.z + b.z);
 }
@@ -45,7 +45,7 @@ inline __hd__ Vec3 operator+(Vec3 a, double b)
 	return make_vec3(a.x + b, a.y + b, a.z + b);
 }
 
-//ÖØĞ´  operator -
+//é‡å†™  operator -
 
 inline __hd__ Vec3 operator-(Vec3 a, Vec3 b) {
 	return make_vec3(a.x - b.x, a.y - b.y, a.z - b.z);
@@ -70,7 +70,7 @@ inline __hd__ Vec3 operator-(Vec3 a, double b)
 	return make_vec3(a.x - b, a.y - b, a.z - b);
 }
 
-//ÖØĞ´  *
+//é‡å†™  *
 
 inline __hd__ Vec3 operator*(Vec3 a, Vec3 b) {
 	return make_vec3(a.x * b.x, a.y * b.y, a.z * b.z);
@@ -100,26 +100,30 @@ inline __hd__ Vec3 operator*(double b, Vec3 a)
 	return make_vec3(a.x * b, a.y * b, a.z * b);
 }
 
-//µã³Ë
+inline __hd__ Vec3 operator/(Vec3 a, double b) {
+	return make_vec3(a.x / b, a.y / b, a.z / b);
+}
+
+//ç‚¹ä¹˜
 
 inline __hd__ double dot(Vec3 a, Vec3 b) {
 	return a.x * b.x + a.y * b.y + a.z * b.z;
 }
 
-//²æ³Ë
+//å‰ä¹˜
 
 inline __hd__ Vec3 cross(Vec3 a, Vec3 b) {
 	return make_vec3(a.y * b.z - a.z * b.y, a.z * b.x - a.x * b.z, a.x * b.y - a.y * b.x);
 }
 
-//¹éÒ»»¯
+//å½’ä¸€åŒ–
 
 inline __hd__ Vec3 normalize(Vec3 a) {
 	double mod = sqrt(dot(a, a));
 	return a * (1.0 / mod);
 }
 
-//coutÊä³ö
+//coutè¾“å‡º
 
 inline std::ostream& operator<<(std::ostream& out, const Vec3& v) {
 	return out << v.x << ' ' << v.y << ' ' << v.z;
